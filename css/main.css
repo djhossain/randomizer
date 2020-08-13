@@ -4,7 +4,7 @@
     /* --mainColor: linear-gradient(to right, #1940ec, #ff16e0); */
     /* --mainColor: #fff; */
     --contentBodyBg: #fff;
-    --mainScreenBg: #fff;
+    --mainScreenBg: rgb(236, 236, 236);
 }
 
 a {
@@ -30,6 +30,7 @@ a {
 }
 
 .mainBody .mainScreen {
+    max-width: 500px;
     width: 50%;
     height: 100%;
     box-shadow: inset -2px -2px 4px rgba(199, 191, 191, 0.5);
@@ -64,14 +65,14 @@ a {
 
 .popUp:hover {
     position: relative;
-    border: none;
-    box-shadow: inset -2px -2px 4px rgba(199, 191, 191, 0.5);
+    border: 1px solid rgba(199, 191, 191, 0.5);
+    box-shadow: inset -2px -2px 4px rgba(199, 191, 191, 0.5), inset 2px 2px 4px rgba(255, 255, 255, 0.918);
 }
 
 .popUp {
     position: relative;
     transition: box-shadow linear 1s;
-    box-shadow: 2px 2px 4px rgba(199, 191, 191, 0.5);
+    box-shadow: 2px 2px 4px rgba(199, 191, 191, 0.5), -2px -2px 4px 1px rgba(250, 250, 250, 0.7);
     -webkit-transition: box-shadow linear 1s;
     -moz-transition: box-shadow linear 1s;
     -ms-transition: box-shadow linear 1s;
@@ -107,6 +108,7 @@ a {
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+    cursor: pointer;
 }
 
 @media (max-width:550px) {
