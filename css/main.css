@@ -1,10 +1,9 @@
 :root {
-    --mainColor: #58d1a9;
-    --mainColorLight: #58d1a98a;
-    /* --mainColor: linear-gradient(to right, #1940ec, #ff16e0); */
-    /* --mainColor: #fff; */
+    --mainColor: linear-gradient(to bottom, #58d1a9, #85d4ba, #58d1a9);
+    --mainColorSolid: #58d1a9;
+    --mainColorLight: linear-gradient(to bottom, #58d1a98a, #76e2be8a, #58d1a98a);
     --contentBodyBg: #fff;
-    --mainScreenBg: rgb(236, 236, 236);
+    --mainScreenBg: #ececec;
 }
 
 a {
@@ -50,6 +49,7 @@ a {
     width: 100%;
     padding: 10px 0;
     text-align: center;
+    box-shadow: 0px 2px 8px -2px rgba(0, 0, 0, 0.2);
 }
 
 .mainBody .mainScreen .navBar span {
@@ -61,42 +61,65 @@ a {
 
 .mainBody .mainScreen .contentBody {
     height: 100%;
+    display: flex;
 }
 
-.popUp:hover {
+.popUp:hover,
+.popUp:focus {
     position: relative;
-    border: 1px solid rgba(199, 191, 191, 0.5);
-    box-shadow: inset -2px -2px 4px rgba(199, 191, 191, 0.5), inset 2px 2px 4px rgba(255, 255, 255, 0.918);
+    box-shadow: inset 2px 2px 4px -1px rgba(0, 0, 0, 0.2), inset -2px -2px 4px -1px rgba(250, 250, 250, 0.7), -0.5px -0.5px 0px rgba(250, 250, 250, 1), 0.5px 0.5px 0 rgba(0, 0, 0, 0.15), 0px 8px 5px -5px rgba(0, 0, 0, 0.05);
 }
 
 .popUp {
     position: relative;
-    transition: box-shadow linear 1s;
-    box-shadow: 2px 2px 4px rgba(199, 191, 191, 0.5), -2px -2px 4px 1px rgba(250, 250, 250, 0.7);
-    -webkit-transition: box-shadow linear 1s;
-    -moz-transition: box-shadow linear 1s;
-    -ms-transition: box-shadow linear 1s;
-    -o-transition: box-shadow linear 1s;
+    transition: box-shadow linear 0.3s;
+    box-shadow: 2px 2px 4px -1px rgba(0, 0, 0, 0.15), -2px -2px 4px -1px rgba(250, 250, 250, 0.7);
+    -webkit-transition: box-shadow linear 0.3s;
+    -moz-transition: box-shadow linear 0.3s;
+    -ms-transition: box-shadow linear 0.3s;
+    -o-transition: box-shadow linear 0.3s;
 }
 
 .optionBox {
+    background: var(--mainScreenBg);
+    padding-top: 10px;
+    /* border-top: 1px dashed var(--mainColorLight);
+    border-bottom: 1px dashed var(--mainColorLight); */
     width: 100%;
-    height: 100%;
+    height: 50vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    overflow: scroll;
+    overflow-y: scroll;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    box-shadow: inset 0px 1px 5px rgba(199, 191, 191, 0.5);
 }
 
 .optionBox::-webkit-scrollbar {
-    display: none;
+    width: 10px;
+}
+
+.optionBox::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.optionBox::-webkit-scrollbar-thumb {
+    background: var(--mainColorLight);
+    border-radius: 5px;
+    border: 0.5px solid var(--mainScreenBg);
 }
 
 .optionBox .option {
+    background: var(--mainScreenBg);
     display: block;
     font-weight: bold;
-    color: var(--mainColor);
+    color: var(--mainColorSolid);
     width: 80%;
     margin: 10px 0;
     padding: 10px;
@@ -104,11 +127,85 @@ a {
     border: none;
     outline: none;
     border-radius: 10px;
+    text-transform: capitalize;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+}
+
+.optionApear {
+    animation-name: apear;
+    animation-duration: 0.3s;
+}
+
+.disApear {
+    animation-name: disapear;
+    animation-duration: 0.3s;
+}
+
+@keyframes apear {
+    0% {
+        transform: scale(0);
+        -webkit-transform: scale(0);
+        -moz-transform: scale(0);
+        -ms-transform: scale(0);
+        -o-transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+    }
+}
+
+@keyframes disapear {
+    0% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+        -webkit-transform: scale(0);
+        -moz-transform: scale(0);
+        -ms-transform: scale(0);
+        -o-transform: scale(0);
+    }
+}
+
+.optionBox span.option {
     cursor: pointer;
+}
+
+.bottomBar {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 20px;
+}
+
+.bottomBar .btn {
+    background: var(--mainColorLight);
+    width: 25%;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
 
 @media (max-width:550px) {
