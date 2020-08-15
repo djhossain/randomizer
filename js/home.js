@@ -1,4 +1,4 @@
-createHome();
+randomSortInit();
 
 async function createHome() {
 
@@ -77,6 +77,7 @@ async function randomSortInit() {
 
     var optionBox = document.createElement('form');
     optionBox.classList.add('optionBox');
+    optionBox.addEventListener('submit', function(e) { e.preventDefault(); });
     document.querySelector('.contentBody').appendChild(optionBox);
 
     createInputBox(optionBox);
@@ -85,7 +86,64 @@ async function randomSortInit() {
     addBtn.onclick = function() { createInputBox(optionBox); };
 
     var doneBtn = createBtn('done');
+    doneBtn.onclick = function() { getOptions(); }
+}
 
+function getOptions() {
+
+    var optionBox = document.querySelector('.optionBox');
+    var options = [];
+
+    for (var i = 0; i < optionBox.children.length; i++) {
+        var val = optionBox.children[i].value;
+
+        if (val != '') {
+            val = val.toLowerCase();
+            options.push(val);
+        }
+
+    }
+
+    var sortedOptions = sortOptions(options);
+}
+
+function sortOptions(data) {
+
+    var optionMap = [];
+    var mx = data.length * 10;
+
+
+    for (var i = 0; i < data.length; i++) {
+        var optionObj = {
+            ocr: 0,
+            index: i
+        };
+        optionMap[i] = optionObj;
+    }
+
+
+    for (var r = 0; r < data.length; r++) {
+        for (var i = 0; i < mx; i++) {
+            var target = Math.floor(Math.random() * data.length);
+            optionMap[target].ocr++;
+        }
+        optionMap = doTheSort(optionMap);
+    }
+
+}
+
+function doTheSort(data) {
+    for (var i = 1; i < data.length; i++) {
+        var temp = data[i];
+        var j = i - 1;
+        while (j >= 0 && data[j].ocr < temp) {
+            data[j + 1] = data[j];
+            j--;
+        }
+        data[j + 1] = temp;
+    }
+    console.log(data);
+    return data;
 }
 
 function createBtn(text) {

@@ -15,6 +15,7 @@ a {
 * {
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
     font-family: 'Overlock', cursive;
 }
 
@@ -57,6 +58,7 @@ a {
     font-size: 24px;
     font-weight: bold;
     letter-spacing: 3px;
+    cursor: pointer;
 }
 
 .mainBody .mainScreen .contentBody {
@@ -136,45 +138,45 @@ a {
 
 .optionApear {
     animation-name: apear;
-    animation-duration: 0.3s;
+    animation-duration: 0.2s;
 }
 
 .disApear {
     animation-name: disapear;
-    animation-duration: 0.3s;
+    animation-duration: 0.2s;
 }
 
 @keyframes apear {
     0% {
-        transform: scale(0);
-        -webkit-transform: scale(0);
-        -moz-transform: scale(0);
-        -ms-transform: scale(0);
-        -o-transform: scale(0);
+        transform: scaleX(0);
+        -webkit-transform: scaleX(0);
+        -moz-transform: scaleX(0);
+        -ms-transform: scaleX(0);
+        -o-transform: scaleX(0);
     }
     100% {
-        transform: scale(1);
-        -webkit-transform: scale(1);
-        -moz-transform: scale(1);
-        -ms-transform: scale(1);
-        -o-transform: scale(1);
+        transform: scaleX(1);
+        -webkit-transform: scaleX(1);
+        -moz-transform: scaleX(1);
+        -ms-transform: scaleX(1);
+        -o-transform: scaleX(1);
     }
 }
 
 @keyframes disapear {
     0% {
-        transform: scale(1);
-        -webkit-transform: scale(1);
-        -moz-transform: scale(1);
-        -ms-transform: scale(1);
-        -o-transform: scale(1);
+        transform: translateX(0%);
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -ms-transform: translateX(0%);
+        -o-transform: translateX(0%);
     }
     100% {
-        transform: scale(0);
-        -webkit-transform: scale(0);
-        -moz-transform: scale(0);
-        -ms-transform: scale(0);
-        -o-transform: scale(0);
+        transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
     }
 }
 
