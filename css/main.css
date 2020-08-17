@@ -1,7 +1,7 @@
 :root {
-    --mainColor: linear-gradient(to bottom, #58d1a9, #85d4ba, #58d1a9);
+    --mainColorLight: linear-gradient(to bottom, #58d1a9, #85d4ba, #58d1a9);
     --mainColorSolid: #58d1a9;
-    --mainColorLight: linear-gradient(to bottom, #58d1a98a, #76e2be8a, #58d1a98a);
+    --mainColor: linear-gradient(to bottom, #58d1a98a, #70d3b28a, #58d1a98a);
     --contentBodyBg: #fff;
     --mainScreenBg: #ececec;
 }
@@ -82,6 +82,17 @@ a {
     -o-transition: box-shadow linear 0.3s;
 }
 
+.popUpNoHover {
+    position: relative;
+    transition: box-shadow linear 0.3s;
+    box-shadow: 2px 2px 4px -1px rgba(0, 0, 0, 0.15), -2px -2px 4px -1px rgba(250, 250, 250, 0.7);
+    -webkit-transition: box-shadow linear 0.3s;
+    -moz-transition: box-shadow linear 0.3s;
+    -ms-transition: box-shadow linear 0.3s;
+    -o-transition: box-shadow linear 0.3s;
+    cursor: none;
+}
+
 .optionBox {
     background: var(--mainScreenBg);
     padding-top: 10px;
@@ -138,12 +149,12 @@ a {
 
 .optionApear {
     animation-name: apear;
-    animation-duration: 0.2s;
+    animation-duration: 0.4s;
 }
 
 .disApear {
     animation-name: disapear;
-    animation-duration: 0.2s;
+    animation-duration: 0.4s;
 }
 
 @keyframes apear {

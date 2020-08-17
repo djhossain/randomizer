@@ -1,4 +1,6 @@
-randomSortInit();
+createHome();
+var choice;
+var pickMul;
 
 async function createHome() {
 
@@ -24,18 +26,158 @@ async function createHome() {
     appendOption(optionBox, pMul);
 }
 
-function createOption(text, type) {
-    var ele = document.createElement(type);
-    ele.classList.add('popUp');
-    ele.classList.add('option');
-    ele.innerHTML = text;
+async function takeOptionsInit() {
+    await clearEverything();
 
-    return ele;
+    var optionBox = document.createElement('form');
+    optionBox.classList.add('optionBox');
+    optionBox.addEventListener('submit', function(e) { e.preventDefault(); });
+    document.querySelector('.contentBody').appendChild(optionBox);
+
+    createInputBox(optionBox, "Enter an option");
+
+    var addBtn = createBtn('Add option');
+    addBtn.onclick = function() { createInputBox(optionBox, "Enter an option"); };
+
+    var doneBtn = createBtn('done');
+    doneBtn.onclick = function() { getOptions(); }
 }
 
-function appendOption(parent, child) {
-    child.classList.add('optionApear');
-    parent.appendChild(child);
+async function showResults(sortedData) {
+
+    await clearEverything();
+    var mx = sortedData.length;
+
+    switch (choice) {
+        case 1:
+            showStart = 0;
+            showEnd = mx;
+            break;
+        case 2:
+            showStart = 0;
+            showEnd = 1 > mx ? mx : 1;
+            break;
+        case 3:
+            showStart = 0;
+            showEnd = pickMul > mx ? mx : pickMul;
+            break;
+    }
+
+    var optionBox = document.createElement('div');
+    optionBox.classList.add('optionBox');
+    document.querySelector('.contentBody').appendChild(optionBox);
+
+    for (var i = showStart; i < showEnd; i++) {
+        var box = createOption(sortedData[i], 'span');
+        box.classList.remove('popUp');
+        box.classList.add('popUpNoHover');
+        appendOption(optionBox, box);
+    }
+
+    var againBtn = createBtn('Try again');
+    againBtn.onclick = function() { takeOptionsInit(); };
+
+    var homeBtn = createBtn('Home');
+    homeBtn.onclick = function() { createHome(); }
+
+}
+async function takePickMul() {
+
+    await clearEverything();
+
+    var optionBox = document.createElement('form');
+    optionBox.classList.add('optionBox');
+    optionBox.addEventListener('submit', function(e) { e.preventDefault(); });
+    document.querySelector('.contentBody').appendChild(optionBox);
+
+    createInputBox(optionBox, "How many to pick?");
+
+    var doneBtn = createBtn('done');
+    doneBtn.onclick = function() {
+        pickMul = document.querySelector('.option').value;
+        pickMul = parseInt(pickMul);
+        takeOptionsInit();
+    }
+}
+
+function getOptions() {
+
+    var optionBox = document.querySelector('.optionBox');
+    var options = [];
+
+    for (var i = 0; i < optionBox.children.length; i++) {
+        var val = optionBox.children[i].value;
+
+        if (val != '') {
+            val = val.toLowerCase();
+            options.push(val);
+        }
+
+    }
+
+    var sortedOptions = sortOptions(options);
+
+    showResults(sortedOptions);
+}
+
+function sortOptions(data) {
+
+    var optionMap = [];
+    var mx = data.length * 10;
+
+
+    for (var i = 0; i < data.length; i++) {
+        var nam = data[i];
+        var optionObj = {
+            ocr: 0,
+            name: nam
+        };
+        optionMap[i] = optionObj;
+    }
+
+
+    for (var r = 0; r < data.length * 100; r++) {
+        for (var i = 0; i < mx; i++) {
+            var target = Math.floor(Math.random() * data.length);
+            optionMap[target].ocr++;
+        }
+        optionMap = doTheSort(optionMap);
+    }
+
+    for (var i = 0; i < data.length; i++) {
+        data[i] = optionMap[i].name;
+    }
+
+    return data;
+}
+
+function doTheSort(data) {
+    for (var i = 1; i < data.length; i++) {
+        var temp = data[i];
+        // console.log(temp);
+        var j = i - 1;
+        while (j >= 0 && data[j].ocr < temp.ocr) {
+            data[j + 1] = data[j];
+            j--;
+        }
+        data[j + 1] = temp;
+    }
+    return data;
+}
+
+function randomSortInit() {
+    choice = 1;
+    takeOptionsInit();
+}
+
+function pickOneInit() {
+    choice = 2;
+    takeOptionsInit();
+}
+
+function pickMultipleInit() {
+    choice = 3;
+    takePickMul();
 }
 
 async function clearEverything() {
@@ -55,95 +197,18 @@ async function clearEverything() {
     })
 }
 
-function check(ele) {
-    return new Promise((resolve, reject) => {
+function createOption(text, type) {
+    var ele = document.createElement(type);
+    ele.classList.add('popUp');
+    ele.classList.add('option');
+    ele.innerHTML = text;
 
-        ele.addEventListener('animationend', function() {
-            resolve();
-        });
-    })
+    return ele;
 }
 
-function delay(ms) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(ms)
-        }, ms)
-    })
-}
-
-async function randomSortInit() {
-    await clearEverything();
-
-    var optionBox = document.createElement('form');
-    optionBox.classList.add('optionBox');
-    optionBox.addEventListener('submit', function(e) { e.preventDefault(); });
-    document.querySelector('.contentBody').appendChild(optionBox);
-
-    createInputBox(optionBox);
-
-    var addBtn = createBtn('Add option');
-    addBtn.onclick = function() { createInputBox(optionBox); };
-
-    var doneBtn = createBtn('done');
-    doneBtn.onclick = function() { getOptions(); }
-}
-
-function getOptions() {
-
-    var optionBox = document.querySelector('.optionBox');
-    var options = [];
-
-    for (var i = 0; i < optionBox.children.length; i++) {
-        var val = optionBox.children[i].value;
-
-        if (val != '') {
-            val = val.toLowerCase();
-            options.push(val);
-        }
-
-    }
-
-    var sortedOptions = sortOptions(options);
-}
-
-function sortOptions(data) {
-
-    var optionMap = [];
-    var mx = data.length * 10;
-
-
-    for (var i = 0; i < data.length; i++) {
-        var optionObj = {
-            ocr: 0,
-            index: i
-        };
-        optionMap[i] = optionObj;
-    }
-
-
-    for (var r = 0; r < data.length; r++) {
-        for (var i = 0; i < mx; i++) {
-            var target = Math.floor(Math.random() * data.length);
-            optionMap[target].ocr++;
-        }
-        optionMap = doTheSort(optionMap);
-    }
-
-}
-
-function doTheSort(data) {
-    for (var i = 1; i < data.length; i++) {
-        var temp = data[i];
-        var j = i - 1;
-        while (j >= 0 && data[j].ocr < temp) {
-            data[j + 1] = data[j];
-            j--;
-        }
-        data[j + 1] = temp;
-    }
-    console.log(data);
-    return data;
+function appendOption(parent, child) {
+    child.classList.add('optionApear');
+    parent.appendChild(child);
 }
 
 function createBtn(text) {
@@ -159,22 +224,21 @@ function createBtn(text) {
     return btn;
 }
 
-function createInputBox(optionBox) {
+function createInputBox(optionBox, text) {
 
     var inp = createOption('', 'input');
-    inp.placeholder = "Enter an option";
+    inp.placeholder = text;
     inp.type = 'text';
     appendOption(optionBox, inp);
 
     optionBox.scrollTop = optionBox.scrollHeight;
 }
 
-function pickOneInit() {
-    clearEverything();
-    console.log('pick one');
-}
+function check(ele) {
+    return new Promise((resolve, reject) => {
 
-function pickMultipleInit() {
-    clearEverything();
-    console.log('pick multiple');
+        ele.addEventListener('animationend', function() {
+            resolve();
+        });
+    })
 }
