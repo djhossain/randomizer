@@ -1,17 +1,16 @@
-var elem = document.querySelector("body");
+/* Get the documentElement (<html>) to display the page in fullscreen */
+var elem = document.documentElement;
 
-/* When the openFullscreen() function is executed, open the video in fullscreen.
-Note that we must include prefixes for different browsers, as they don't support the requestFullscreen method yet */
+/* View in fullscreen */
 function openFullscreen() {
-    if (elem.requestFullscreen != null) {
+    document.querySelector('.bottomBar').innerHTML = '';
+    if (elem.requestFullscreen) {
         elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen != null) { /* Firefox */
+    } else if (elem.mozRequestFullScreen) { /* Firefox */
         elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen != null) { /* Chrome, Safari and Opera */
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
         elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen != null) { /* IE/Edge */
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
         elem.msRequestFullscreen();
     }
 }
-
-openFullscreen();

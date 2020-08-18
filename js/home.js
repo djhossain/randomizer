@@ -20,6 +20,9 @@ async function createHome() {
     var pMul = createOption('pick multiple', 'span');
     pMul.onclick = pickMultipleInit;
 
+    var fullScreenBtn = createBtn('Full screen');
+    fullScreenBtn.onclick = function() { openFullscreen(); }
+
     document.querySelector('.contentBody').appendChild(optionBox);
     appendOption(optionBox, rSort);
     appendOption(optionBox, pOne);
