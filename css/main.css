@@ -32,7 +32,7 @@ a {
 .mainBody .mainScreen {
     max-width: 500px;
     width: 50%;
-    height: 100%;
+    height: 90%;
     box-shadow: inset -2px -2px 4px rgba(199, 191, 191, 0.5);
     background: var(--mainScreenBg);
     display: flex;
@@ -154,7 +154,7 @@ a {
 
 .disApear {
     animation-name: disapear;
-    animation-duration: 0.4s;
+    animation-duration: 0.2s;
 }
 
 @keyframes apear {

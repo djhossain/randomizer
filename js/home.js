@@ -31,13 +31,15 @@ async function takeOptionsInit() {
 
     var optionBox = document.createElement('form');
     optionBox.classList.add('optionBox');
-    optionBox.addEventListener('submit', function(e) { e.preventDefault(); });
+    optionBox.onsubmit = function(e) {
+        e.preventDefault();
+    };
     document.querySelector('.contentBody').appendChild(optionBox);
 
-    createInputBox(optionBox, "Enter an option");
+    createInputBox(optionBox, "Enter an option").focus();
 
     var addBtn = createBtn('Add option');
-    addBtn.onclick = function() { createInputBox(optionBox, "Enter an option"); };
+    addBtn.onclick = function() { createInputBox(optionBox, "Enter an option").focus(); };
 
     var doneBtn = createBtn('done');
     doneBtn.onclick = function() { getOptions(); }
@@ -92,7 +94,7 @@ async function takePickMul() {
 
     createInputBox(optionBox, "How many to pick?");
 
-    var doneBtn = createBtn('done');
+    var doneBtn = createBtn('next');
     doneBtn.onclick = function() {
         pickMul = document.querySelector('.option').value;
         pickMul = parseInt(pickMul);
@@ -232,6 +234,8 @@ function createInputBox(optionBox, text) {
     appendOption(optionBox, inp);
 
     optionBox.scrollTop = optionBox.scrollHeight;
+
+    return inp;
 }
 
 function check(ele) {
