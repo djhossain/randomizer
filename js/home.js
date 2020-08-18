@@ -1,6 +1,7 @@
 createHome();
 var choice;
 var pickMul;
+var fullscreen = 0;
 
 async function createHome() {
 
@@ -20,8 +21,7 @@ async function createHome() {
     var pMul = createOption('pick multiple', 'span');
     pMul.onclick = pickMultipleInit;
 
-    var fullScreenBtn = createBtn('Full screen');
-    fullScreenBtn.onclick = function() { openFullscreen(); }
+    fullscreenInit();
 
     document.querySelector('.contentBody').appendChild(optionBox);
     appendOption(optionBox, rSort);
@@ -248,4 +248,32 @@ function check(ele) {
             resolve();
         });
     })
+}
+
+function fullscreenInit() {
+    if (!fullscreen) {
+        createOpenBtn();
+        fullscreen = 1;
+    } else {
+        createExitBtn();
+        fullscreen = 0;
+    }
+}
+
+function createOpenBtn() {
+    var Btn = createBtn('Full Screen');
+    Btn.onclick = function() {
+        document.querySelector('.bottomBar').innerHTML = '';
+        openFullscreen();
+        createExitBtn();
+    }
+}
+
+function createExitBtn() {
+    var Btn = createBtn('Exit Full Screen');
+    Btn.onclick = function() {
+        document.querySelector('.bottomBar').innerHTML = '';
+        closeFullscreen();
+        createOpenBtn();
+    }
 }
