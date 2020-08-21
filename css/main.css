@@ -16,7 +16,7 @@ a {
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
-    font-family: 'Overlock', cursive;
+    font-family: 'Baumans', cursive;
 }
 
 .mainBody {
@@ -30,8 +30,8 @@ a {
 }
 
 .mainBody .mainScreen {
-    max-width: 500px;
-    width: 50%;
+    max-width: 450px;
+    width: 45%;
     height: 90%;
     box-shadow: inset -2px -2px 4px rgba(199, 191, 191, 0.5);
     background: var(--mainScreenBg);
@@ -54,11 +54,16 @@ a {
 }
 
 .mainBody .mainScreen .navBar span {
-    color: rgb(255, 117, 4);
+    color: rgb(255, 255, 255);
     font-size: 24px;
     font-weight: bold;
     letter-spacing: 3px;
     cursor: pointer;
+}
+
+.mainBody .mainScreen .heading {
+    text-align: center;
+    padding-top: 10%;
 }
 
 .mainBody .mainScreen .contentBody {
@@ -72,7 +77,8 @@ a {
     box-shadow: inset 2px 2px 4px -1px rgba(0, 0, 0, 0.2), inset -2px -2px 4px -1px rgba(250, 250, 250, 0.7), -0.5px -0.5px 0px rgba(250, 250, 250, 1), 0.5px 0.5px 0 rgba(0, 0, 0, 0.15), 0px 8px 5px -5px rgba(0, 0, 0, 0.05);
 }
 
-.popUp {
+.popUp,
+.popUpNoHover {
     position: relative;
     transition: box-shadow linear 0.3s;
     box-shadow: 2px 2px 4px -1px rgba(0, 0, 0, 0.15), -2px -2px 4px -1px rgba(250, 250, 250, 0.7);
@@ -83,21 +89,12 @@ a {
 }
 
 .popUpNoHover {
-    position: relative;
-    transition: box-shadow linear 0.3s;
-    box-shadow: 2px 2px 4px -1px rgba(0, 0, 0, 0.15), -2px -2px 4px -1px rgba(250, 250, 250, 0.7);
-    -webkit-transition: box-shadow linear 0.3s;
-    -moz-transition: box-shadow linear 0.3s;
-    -ms-transition: box-shadow linear 0.3s;
-    -o-transition: box-shadow linear 0.3s;
     cursor: none;
 }
 
 .optionBox {
     background: var(--mainScreenBg);
     padding-top: 10px;
-    /* border-top: 1px dashed var(--mainColorLight);
-    border-bottom: 1px dashed var(--mainColorLight); */
     width: 100%;
     height: 50vh;
     display: flex;
@@ -131,7 +128,6 @@ a {
 .optionBox .option {
     background: var(--mainScreenBg);
     display: block;
-    font-weight: bold;
     color: var(--mainColorSolid);
     width: 80%;
     margin: 10px 0;
@@ -139,12 +135,12 @@ a {
     text-align: center;
     border: none;
     outline: none;
-    border-radius: 10px;
+    border-radius: 20px;
     text-transform: capitalize;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
 }
 
 .optionApear {
@@ -207,7 +203,6 @@ a {
     text-align: center;
     text-transform: capitalize;
     font-size: 16px;
-    font-weight: bold;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -232,21 +227,3 @@ a {
         -o-border-radius: 0;
     }
 }
-
-
-/* 
-.popUp:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: inherit;
-    -webkit-border-radius: inherit;
-    -moz-border-radius: inherit;
-    -ms-border-radius: inherit;
-    -o-border-radius: inherit;
-    box-shadow: 3px 3px 4px rgba(199, 191, 191, 0.5);
-} */

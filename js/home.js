@@ -253,10 +253,8 @@ function check(ele) {
 function fullscreenInit() {
     if (!fullscreen) {
         createOpenBtn();
-        fullscreen = 1;
     } else {
         createExitBtn();
-        fullscreen = 0;
     }
 }
 
@@ -275,5 +273,29 @@ function createExitBtn() {
         document.querySelector('.bottomBar').innerHTML = '';
         closeFullscreen();
         createOpenBtn();
+    }
+}
+
+function openFullscreen() {
+    var elem = document.documentElement;
+    fullscreen = 1;
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        elem.webkitRequestFullscreen();
+    }
+}
+
+function closeFullscreen() {
+    var elem = document.documentElement;
+    fullscreen = 0;
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { /* Firefox */
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+        document.webkitExitFullscreen();
     }
 }
